@@ -13,5 +13,5 @@ pantera\news\frontend\Module
 ```
 Миграции запускать по пути 
 ```
-pantera\news\console\migrations
+@pantera/news/console/migrations
 ```
