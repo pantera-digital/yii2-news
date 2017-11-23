@@ -4,7 +4,7 @@ namespace pantera\news\frontend\controllers;
 
 use pantera\news\common\models\News;
 use pantera\news\frontend\models\NewsSearch;
-use frontend\controllers\Controller;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class DefaultController extends Controller
