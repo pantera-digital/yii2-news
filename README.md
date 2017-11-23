@@ -5,9 +5,9 @@ News content management module for Yii Framework 2.x
 
 ## Установка
 
-Для установки добавти в свой composer.json
+Предпочтительно через composer:
 ```
-composer require pantera-digital/yii2-news "@dev"
+$ composer require pantera-digital/yii2-news "dev-master"
 ```
 ##### Backend
 ```
@@ -27,5 +27,5 @@ composer require pantera-digital/yii2-news "@dev"
 ```
 ##### Миграции
 ```
-php yii migrate/up --migrationPath=@pantera/news/console/migrations
+$ php yii migrate/up --migrationPath=@pantera/news/console/migrations
 ```
