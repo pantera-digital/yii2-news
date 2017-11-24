@@ -1,15 +1,13 @@
 # yii2-news
-News content management module for Yii Framework 2.x
-
-Модуль предназначен для шаблона advanced
+News content management module for Yii Framework 2.x Модуль предназначен для шаблона advanced
 
 ## Установка
-
 Предпочтительно через composer:
 ```
 $ composer require pantera-digital/yii2-news "dev-master"
 ```
-##### Backend
+
+## Backend
 ```
 'modules' => [
     'news' => [
@@ -17,7 +15,8 @@ $ composer require pantera-digital/yii2-news "dev-master"
     ],
 ],
 ```
-##### Frontend 
+
+## Frontend 
 ```
 'modules' => [
     'news' => [
@@ -25,11 +24,12 @@ $ composer require pantera-digital/yii2-news "dev-master"
     ],
 ],
 ```
-##### Миграции
+
+## Миграции
 ```
 $ php yii migrate/up --migrationPath=@pantera/news/console/migrations
 ```
 
-##### Contributing
+## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
