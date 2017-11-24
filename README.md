@@ -29,3 +29,7 @@ $ composer require pantera-digital/yii2-news "dev-master"
 ```
 $ php yii migrate/up --migrationPath=@pantera/news/console/migrations
 ```
+
+##### Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
