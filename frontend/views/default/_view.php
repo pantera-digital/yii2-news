@@ -7,13 +7,15 @@ use yii\web\View;
 /* @var $model News */
 ?>
 <div class="news-teaser">
-    <div class="news-teaser__l">
-        <div class="news-teaser-image image">
-            <a href="<?= $model->getUrl() ?>">
-                <img src="/img/v2/i40.jpg" alt="">
-            </a>
+    <?php if ($model->getMedia() && $model->getMedia()->issetMedia()): ?>
+        <div class="news-teaser__l">
+            <div class="news-teaser-image image">
+                <a href="<?= $model->getUrl() ?>">
+                    <img src="<?= $model->getMedia()->image(270, 200, false) ?>" alt="">
+                </a>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
     <div class="news-teaser__r">
         <div class="news-date"><?= Yii::$app->formatter->asDate($model->created_at) ?></div>
         <div class="news-teaser-title">

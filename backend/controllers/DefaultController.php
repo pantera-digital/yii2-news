@@ -2,6 +2,8 @@
 
 namespace pantera\news\backend\controllers;
 
+use common\modules\media\actions\MediaDeleteAction;
+use common\modules\media\actions\MediaUploadAction;
 use pantera\news\backend\models\NewsSearch;
 use pantera\news\common\models\News;
 use Yii;
@@ -32,6 +34,29 @@ class DefaultController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'file-upload' => [
+                'class' => MediaUploadAction::className(),
+                'attribute' => 'file',
+                'model' => function () {
+                    if (Yii::$app->request->get('id')) {
+                        return $this->findModel(Yii::$app->request->get('id'));
+                    } else {
+                        return new News();
+                    }
+                },
+            ],
+            'file-delete' => [
+                'class' => MediaDeleteAction::className(),
+                'model' => function () {
+                    return $this->findModel(Yii::$app->request->get('id'));
+                },
             ],
         ];
     }
@@ -70,6 +95,7 @@ class DefaultController extends Controller
      * Updates an existing model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
@@ -87,6 +113,10 @@ class DefaultController extends Controller
      * Deletes an existing model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

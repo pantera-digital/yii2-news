@@ -2,7 +2,11 @@
 
 namespace pantera\news\common\models;
 
+use common\modules\media\behaviors\MediaUploadBehavior;
+use common\modules\media\models\Media;
+use yii\db\ActiveRecord;
 use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "news".
@@ -12,9 +16,23 @@ use yii\helpers\Url;
  * @property string $announcement
  * @property string $text
  * @property string $created_at
+ *
+ * @method Media getMedia()
  */
-class News extends \yii\db\ActiveRecord
+class News extends ActiveRecord
 {
+    /* @var UploadedFile|null */
+    public $file;
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => MediaUploadBehavior::className(),
+                'name' => 'media',
+            ],
+        ];
+    }
 
     /**
      * Получить ссылку на просмотр новости
@@ -57,6 +75,7 @@ class News extends \yii\db\ActiveRecord
             'announcement' => 'Анонс',
             'text' => 'Текст',
             'created_at' => 'Дата',
+            'file' => 'Картинка'
         ];
     }
 }

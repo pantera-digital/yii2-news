@@ -24,7 +24,7 @@ class NewsSearch extends News
             'query' => $query,
             'pagination' => false,
             'sort' => [
-                'defaultOrder' => ['id' => SORT_DESC]
+                'defaultOrder' => ['created_at' => SORT_DESC]
             ]
         ]);
         return $dataProvider;
