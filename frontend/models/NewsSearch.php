@@ -22,7 +22,6 @@ class NewsSearch extends News
         $query = News::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => false,
             'sort' => [
                 'defaultOrder' => ['created_at' => SORT_DESC]
             ]
