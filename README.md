@@ -4,7 +4,7 @@ News content management module for Yii Framework 2.x Модуль предназ
 ## Установка
 Предпочтительно через composer:
 ```
-$ composer require pantera-digital/yii2-news "dev-master"
+$ composer require pantera-digital/yii2-news "dev-kid"
 ```
 
 ## Backend
