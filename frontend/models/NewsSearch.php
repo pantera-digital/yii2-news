@@ -24,7 +24,10 @@ class NewsSearch extends News
             'query' => $query,
             'sort' => [
                 'defaultOrder' => ['created_at' => SORT_DESC]
-            ]
+            ],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
         return $dataProvider;
     }
