@@ -3,11 +3,13 @@
 namespace pantera\news\frontend\models;
 
 use pantera\news\common\models\News;
+use pantera\news\common\models\NewsTag;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 class NewsSearch extends News
 {
+    public $tag;
 
     /**
      * @inheritdoc
@@ -19,7 +21,9 @@ class NewsSearch extends News
 
     public function search()
     {
-        $query = News::find();
+        $query = News::find()
+            ->joinWith(['tags'])
+            ->andFilterWhere(['=', NewsTag::tableName() . '.name', $this->tag]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [

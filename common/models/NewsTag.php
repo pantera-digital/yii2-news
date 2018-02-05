@@ -1,7 +1,9 @@
 <?php
 
 namespace pantera\news\common\models;
+
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "news_tag".
@@ -26,6 +28,18 @@ class NewsTag extends \yii\db\ActiveRecord
             return ArrayHelper::map($models, 'name', 'name');
         }
         return $models;
+    }
+
+    /**
+     * Получить ссылку на список новостей по этому тегу
+     * @return string
+     */
+    public function getUrl()
+    {
+        return Url::to([
+            '/news/default/tag',
+            'tag' => $this->name
+        ]);
     }
 
     /**
@@ -55,8 +69,8 @@ class NewsTag extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'frequency' => 'Frequency',
+            'name' => 'Название',
+            'frequency' => 'Частота',
         ];
     }
 

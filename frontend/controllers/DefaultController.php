@@ -4,11 +4,26 @@ namespace pantera\news\frontend\controllers;
 
 use pantera\news\common\models\News;
 use pantera\news\frontend\models\NewsSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
+    /**
+     * Просмотр списка новостей по тегу
+     * @return string
+     */
+    public function actionTag()
+    {
+        $searchModel = new NewsSearch();
+        $searchModel->tag = Yii::$app->request->get('tag');
+        $dataProvider = $searchModel->search();
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Просмотр списка новостей
      * @return string
