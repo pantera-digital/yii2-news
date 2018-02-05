@@ -4,6 +4,7 @@ namespace pantera\news\common\models;
 
 use common\modules\media\behaviors\MediaUploadBehavior;
 use common\modules\media\models\Media;
+use creocoder\taggable\TaggableBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
@@ -16,6 +17,7 @@ use yii\web\UploadedFile;
  * @property string $announcement
  * @property string $text
  * @property string $created_at
+ * @property NewsTag[] $tags
  *
  * @method Media getMedia()
  */
@@ -30,6 +32,10 @@ class News extends ActiveRecord
             [
                 'class' => MediaUploadBehavior::className(),
                 'name' => 'media',
+            ],
+            'taggable' => [
+                'class' => TaggableBehavior::className(),
+                'tagValuesAsArray' => true,
             ],
         ];
     }
@@ -60,7 +66,7 @@ class News extends ActiveRecord
             [['title', 'text'], 'required'],
             [['text'], 'string'],
             [['title', 'announcement'], 'string', 'max' => 250],
-            [['created_at'], 'safe'],
+            [['created_at', 'tagValues'], 'safe'],
         ];
     }
 
@@ -75,7 +81,14 @@ class News extends ActiveRecord
             'announcement' => 'Анонс',
             'text' => 'Текст',
             'created_at' => 'Дата',
-            'file' => 'Картинка'
+            'file' => 'Картинка',
+            'tagValues' => 'Теги',
         ];
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(NewsTag::className(), ['id' => 'news_tag_id'])
+            ->viaTable('news_news_tag', ['news_id' => 'id']);
     }
 }

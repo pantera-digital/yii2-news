@@ -2,7 +2,9 @@
 
 use kartik\widgets\ActiveForm;
 use kartik\widgets\FileInput;
+use kartik\widgets\Select2;
 use mihaildev\ckeditor\CKEditor;
+use pantera\news\common\models\NewsTag;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\JsExpression;
@@ -20,6 +22,15 @@ use yii\web\JsExpression;
     ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tagValues')->widget(Select2::className(), [
+        'data' => NewsTag::getList(),
+        'options' => ['placeholder' => 'Выберите теги', 'multiple' => true],
+        'pluginOptions' => [
+            'tags' => true,
+            'tokenSeparators' => [','],
+        ],
+    ]) ?>
 
     <?= $form->field($model, 'announcement')->textInput(['maxlength' => true]) ?>
 
