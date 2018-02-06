@@ -5,6 +5,9 @@ namespace pantera\news\common\models;
 use common\modules\media\behaviors\MediaUploadBehavior;
 use common\modules\media\models\Media;
 use creocoder\taggable\TaggableBehavior;
+use frontend\themes\v2\widgets\programItem\ProgramItem;
+use Twig_SimpleFunction;
+use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
@@ -25,6 +28,19 @@ class News extends ActiveRecord
 {
     /* @var UploadedFile|null */
     public $file;
+
+    /**
+     * Обработка описания через twig
+     */
+    public function prepare()
+    {
+        $twig = new \Twig_Environment(new \Twig_Loader_String());
+        $twigFunction = new Twig_SimpleFunction('ProgramItem', function ($method, $params) {
+            return ProgramItem::$method($params);
+        });
+        $twig->addFunction($twigFunction);
+        $this->text = $twig->render(html_entity_decode($this->text));
+    }
 
     public function behaviors()
     {

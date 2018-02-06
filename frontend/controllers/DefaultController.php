@@ -45,6 +45,7 @@ class DefaultController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $model->prepare();
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->searchOther($id);
         return $this->render('view', [
