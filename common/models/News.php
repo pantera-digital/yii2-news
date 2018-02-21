@@ -7,8 +7,8 @@ use common\modules\media\models\Media;
 use creocoder\taggable\TaggableBehavior;
 use frontend\themes\v2\widgets\programItem\ProgramItem;
 use Twig_SimpleFunction;
-use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
@@ -39,7 +39,7 @@ class News extends ActiveRecord
             return ProgramItem::$method($params);
         });
         $twig->addFunction($twigFunction);
-        $this->text = $twig->render(html_entity_decode($this->text));
+        $this->text = $twig->render(Html::decode($this->text));
     }
 
     public function behaviors()
