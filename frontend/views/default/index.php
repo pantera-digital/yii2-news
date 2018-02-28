@@ -5,7 +5,11 @@ use yii\data\ActiveDataProvider;
 use yii\widgets\ListView;
 
 /* @var $dataProvider ActiveDataProvider */
-$this->title = 'Новости';
+$title = 'Новости о детском отдыхе и лагерях';
+if(Yii::$app->request->get('page')){
+    $title .= ' - страница ' . Yii::$app->request->get('page');
+}
+$this->title = $title;
 $this->params['breadcrumbs'][] = 'Новости';
 ?>
 
