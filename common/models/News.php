@@ -7,6 +7,7 @@ use common\modules\media\models\Media;
 use creocoder\taggable\TaggableBehavior;
 use frontend\themes\v2\widgets\programItem\ProgramItem;
 use Twig_SimpleFunction;
+use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -28,6 +29,15 @@ class News extends ActiveRecord
 {
     /* @var UploadedFile|null */
     public $file;
+
+    /**
+     * Получить мета описание
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->title . ' от ' . Yii::$app->formatter->asDate($this->created_at) . ' КИД.Travel - детский и семейный отдых';
+    }
 
     /**
      * Обработка описания через twig
