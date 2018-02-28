@@ -32,6 +32,7 @@ class NewsSearch extends News
             'pagination' => [
                 'pageSize' => 10,
                 'defaultPageSize' => 10,
+                'forcePageParam' => false,
             ],
         ]);
         return $dataProvider;
