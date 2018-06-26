@@ -7,11 +7,11 @@ use yii\web\View;
 /* @var $model News */
 ?>
 <div class="news-teaser">
-    <?php if ($model->getMedia() && $model->getMedia()->issetMedia()): ?>
+    <?php if ($model->media && $model->media->issetMedia()): ?>
         <div class="news-teaser__l">
             <div class="news-teaser-image image">
                 <a href="<?= $model->getUrl() ?>">
-                    <img src="<?= $model->getMedia()->image(90, 71, false) ?>" alt="">
+                    <img src="<?= $model->media->image(90, 71, false) ?>" alt="">
                 </a>
             </div>
         </div>

@@ -4,6 +4,9 @@ namespace pantera\news\backend\controllers;
 
 use common\modules\media\actions\MediaDeleteAction;
 use common\modules\media\actions\MediaUploadAction;
+use pantera\media\actions\kartik\MediaDeleteActionKartik;
+use pantera\media\actions\kartik\MediaUploadActionKartik;
+use pantera\media\models\Media;
 use pantera\news\backend\models\NewsSearch;
 use pantera\news\common\models\News;
 use Yii;
@@ -42,8 +45,7 @@ class DefaultController extends Controller
     {
         return [
             'file-upload' => [
-                'class' => MediaUploadAction::className(),
-                'attribute' => 'file',
+                'class' => MediaUploadActionKartik::className(),
                 'model' => function () {
                     if (Yii::$app->request->get('id')) {
                         return $this->findModel(Yii::$app->request->get('id'));
@@ -53,9 +55,9 @@ class DefaultController extends Controller
                 },
             ],
             'file-delete' => [
-                'class' => MediaDeleteAction::className(),
+                'class' => MediaDeleteActionKartik::className(),
                 'model' => function () {
-                    return $this->findModel(Yii::$app->request->get('id'));
+                    return Media::findOne(Yii::$app->request->get('id'));
                 },
             ],
         ];

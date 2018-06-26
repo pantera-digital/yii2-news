@@ -43,48 +43,12 @@ use yii\web\JsExpression;
 
     <div class="form-group">
         <label class="control-label"><?= $model->getAttributeLabel('file') ?></label>
-        <?php
-        $eventFileUploaded = <<<JS
-    function(e, data, previewId){
-        var input = $(e.target);
-        $("#" + previewId).find('.media-id').val(data.response.mediaId);
-    }
-JS;
-        $initialPreview = [];
-        $initialPreviewConfig = [];
-        $initialPreviewThumbTags = [];
-        if ($model->getMedia()) {
-            $initialPreview[] = $model->getMedia()->image();
-            $initialPreviewConfig[] = [
-                'caption' => $model->getMedia()->name,
-                'size' => $model->getMedia()->size,
-                'url' => Url::to(['file-delete', 'id' => $model->id]),
-            ];
-            $initialPreviewThumbTags[] = [
-                'mediaId' => $model->getMedia()->id,
-            ];
-        }
-        echo FileInput::widget([
+        <?= pantera\media\widgets\kartik\MediaUploadWidgetKartik::widget([
             'model' => $model,
-            'attribute' => 'file',
-            'pluginOptions' => [
-                'uploadUrl' => Url::to(['file-upload', 'id' => $model->id]),
-                'maxFileSize' => 2800,
-                'overwriteInitial' => false,
-                'initialPreviewAsData' => true,
-                'initialPreview' => $initialPreview,
-                'initialPreviewConfig' => $initialPreviewConfig,
-                'initialPreviewThumbTags' => $initialPreviewThumbTags,
-                'otherActionButtons' => '<input type="hidden" name="media" value="mediaId" class="media-id" />',
-                'fileActionSettings' => [
-                    'showZoom' => false,
-                ],
-            ],
-            'pluginEvents' => [
-                'fileuploaded' => new JsExpression($eventFileUploaded),
-            ],
-        ]);
-        ?>
+            'bucket' => 'media',
+            'urlUpload' => ['file-upload', 'id' => $model->id],
+            'urlDelete' => ['file-delete'],
+        ]) ?>
     </div>
 
     <?= $form->field($model, 'created_at')->textInput() ?>

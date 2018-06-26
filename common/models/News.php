@@ -2,16 +2,15 @@
 
 namespace pantera\news\common\models;
 
-use common\modules\media\behaviors\MediaUploadBehavior;
-use common\modules\media\models\Media;
 use creocoder\taggable\TaggableBehavior;
 use frontend\themes\v2\widgets\programItem\ProgramItem;
+use pantera\media\behaviors\MediaUploadBehavior;
+use pantera\media\models\Media;
 use Twig_SimpleFunction;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "news".
@@ -23,13 +22,10 @@ use yii\web\UploadedFile;
  * @property string $created_at
  * @property NewsTag[] $tags
  *
- * @method Media getMedia()
+ * @property  Media $media
  */
 class News extends ActiveRecord
 {
-    /* @var UploadedFile|null */
-    public $file;
-
     /**
      * Получить мета описание
      * @return string
@@ -57,7 +53,9 @@ class News extends ActiveRecord
         return [
             [
                 'class' => MediaUploadBehavior::className(),
-                'name' => 'media',
+                'buckets' => [
+                    'media' => [],
+                ]
             ],
             'taggable' => [
                 'class' => TaggableBehavior::className(),
