@@ -8,18 +8,13 @@ use yii\widgets\ListView;
 /* @var $model News */
 /* @var $dataProvider ActiveDataProvider */
 /* @var $this View */
-$this->title = $model->title . ' - Новости KID.Travel';
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->title;
-$this->registerMetaTag([
-    'name' => 'description',
-    'content' => $model->getMetaDescription(),
-])
 ?>
 
 <div class="news">
     <div class="news-date"><?= Yii::$app->formatter->asDate($model->created_at) ?></div>
-    <h1><?= $model->title ?></h1>
+    <h1><?= Yii::$app->seo->getH1() ?></h1>
     <div class="news-description">
         <?= $model->text ?: $model->announcement ?>
     </div>

@@ -27,15 +27,6 @@ use yii\helpers\Url;
 class News extends ActiveRecord
 {
     /**
-     * Получить мета описание
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->title . ' от ' . Yii::$app->formatter->asDate($this->created_at) . ' КИД.Travel - детский и семейный отдых';
-    }
-
-    /**
      * Обработка описания через twig
      */
     public function prepare()

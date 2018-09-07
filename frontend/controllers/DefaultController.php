@@ -4,6 +4,7 @@ namespace pantera\news\frontend\controllers;
 
 use pantera\news\common\models\News;
 use pantera\news\frontend\models\NewsSearch;
+use pantera\seo\models\SeoPresets;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -19,6 +20,10 @@ class DefaultController extends Controller
         $searchModel = new NewsSearch();
         $searchModel->tag = Yii::$app->request->get('tag');
         $dataProvider = $searchModel->search();
+        SeoPresets::apply('newsList', [], [
+            'title' => 'Все новости - страница ' . Yii::$app->request->get('page', 1),
+            'h1' => 'Все новости',
+        ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -32,6 +37,10 @@ class DefaultController extends Controller
     {
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search();
+        SeoPresets::apply('newsList', [], [
+            'title' => 'Все новости - страница ' . Yii::$app->request->get('page', 1),
+            'h1' => 'Все новости',
+        ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -41,6 +50,7 @@ class DefaultController extends Controller
      * Просмотр конкретной новости
      * @param integer $id
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -48,6 +58,12 @@ class DefaultController extends Controller
         $model->prepare();
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->searchOther($id);
+        SeoPresets::apply('newsView', [
+            'model' => $model,
+        ], [
+            'title' => $model->title,
+            'h1' => $model->title,
+        ]);
         return $this->render('view', [
             'model' => $model,
             'dataProvider' => $dataProvider,

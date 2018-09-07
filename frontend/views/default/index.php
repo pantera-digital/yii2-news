@@ -8,8 +8,6 @@ use yii\widgets\ListView;
 
 /* @var $dataProvider ActiveDataProvider */
 /* @var $this View */
-$title = 'Новости о детском отдыхе и лагерях - страница ' . Yii::$app->request->get('page', 1);
-$this->title = $title;
 $this->params['breadcrumbs'][] = 'Новости';
 if (Yii::$app->request->get('page')) {
     $this->registerLinkTag([
@@ -19,7 +17,9 @@ if (Yii::$app->request->get('page')) {
 }
 ?>
 
-<h1>Все новости</h1>
+<h1>
+    <?= Yii::$app->seo->getH1() ?>
+</h1>
 <?= NewsTagList::widget() ?>
 <?= ListView::widget([
     'dataProvider' => $dataProvider,
