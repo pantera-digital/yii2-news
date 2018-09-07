@@ -9,7 +9,8 @@
   ],
   "require": {
     "creocoder/yii2-taggable": "^2.0",
-    "pantera-digital/yii2-media": "dev-master"
+    "pantera-digital/yii2-media": "dev-master",
+    "pantera-digital/yii2-seo": "*"
   },
   "autoload": {
     "psr-4": {
