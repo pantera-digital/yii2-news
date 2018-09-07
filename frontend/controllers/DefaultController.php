@@ -4,6 +4,7 @@ namespace pantera\news\frontend\controllers;
 
 use pantera\news\common\models\News;
 use pantera\news\frontend\models\NewsSearch;
+use pantera\news\frontend\Module;
 use pantera\seo\models\SeoPresets;
 use Yii;
 use yii\web\Controller;
@@ -11,6 +12,9 @@ use yii\web\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
+    /* @var Module */
+    public $module;
+
     /**
      * Просмотр списка новостей по тегу
      * @return string
@@ -20,7 +24,7 @@ class DefaultController extends Controller
         $searchModel = new NewsSearch();
         $searchModel->tag = Yii::$app->request->get('tag');
         $dataProvider = $searchModel->search();
-        SeoPresets::apply('newsList', [], [
+        SeoPresets::apply($this->module->seoPresentNameList, [], [
             'title' => 'Все новости - страница ' . Yii::$app->request->get('page', 1),
             'h1' => 'Все новости',
         ]);
@@ -37,7 +41,7 @@ class DefaultController extends Controller
     {
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->search();
-        SeoPresets::apply('newsList', [], [
+        SeoPresets::apply($this->module->seoPresentNameList, [], [
             'title' => 'Все новости - страница ' . Yii::$app->request->get('page', 1),
             'h1' => 'Все новости',
         ]);
@@ -58,7 +62,7 @@ class DefaultController extends Controller
         $model->prepare();
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->searchOther($id);
-        SeoPresets::apply('newsView', [
+        SeoPresets::apply($this->module->seoPresentNameView, [
             'model' => $model,
         ], [
             'title' => $model->title,
