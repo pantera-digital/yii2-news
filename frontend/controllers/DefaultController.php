@@ -3,10 +3,10 @@
 namespace pantera\news\frontend\controllers;
 
 use pantera\news\common\models\News;
+use pantera\news\frontend\EventPageView;
 use pantera\news\frontend\models\NewsSearch;
 use pantera\news\frontend\Module;
 use Yii;
-use yii\base\Event;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -59,7 +59,7 @@ class DefaultController extends Controller
         $searchModel = new NewsSearch();
         $dataProvider = $searchModel->searchOther($id);
         $this->view->title = $model->title;
-        $this->module->trigger($this->module::EVENT_PAGE_VIEW, new Event(['model' => $model]));
+        $this->module->trigger($this->module::EVENT_PAGE_VIEW, new EventPageView(['model' => $model]));
         return $this->render('view', [
             'model' => $model,
             'dataProvider' => $dataProvider,
