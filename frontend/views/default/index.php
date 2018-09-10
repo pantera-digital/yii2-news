@@ -17,9 +17,7 @@ if (Yii::$app->request->get('page')) {
 }
 ?>
 
-<h1>
-    <?= Yii::$app->seo->getH1() ?>
-</h1>
+<h1>Все новости</h1>
 <?= NewsTagList::widget() ?>
 <?= ListView::widget([
     'dataProvider' => $dataProvider,

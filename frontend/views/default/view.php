@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $model->title;
 
 <div class="news">
     <div class="news-date"><?= Yii::$app->formatter->asDate($model->created_at) ?></div>
-    <h1><?= Yii::$app->seo->getH1() ?></h1>
+    <h1><?= $model->title ?></h1>
     <div class="news-description">
         <?= $model->text ?: $model->announcement ?>
     </div>
