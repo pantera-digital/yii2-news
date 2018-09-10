@@ -6,10 +6,7 @@ use creocoder\taggable\TaggableBehavior;
 use frontend\themes\v2\widgets\programItem\ProgramItem;
 use pantera\media\behaviors\MediaUploadBehavior;
 use pantera\media\models\Media;
-use Twig_SimpleFunction;
-use Yii;
 use yii\db\ActiveRecord;
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
@@ -26,19 +23,6 @@ use yii\helpers\Url;
  */
 class News extends ActiveRecord
 {
-    /**
-     * Обработка описания через twig
-     */
-    public function prepare()
-    {
-        $twig = new \Twig_Environment(new \Twig_Loader_String());
-        $twigFunction = new Twig_SimpleFunction('ProgramItem', function ($method, $params) {
-            return ProgramItem::$method($params);
-        });
-        $twig->addFunction($twigFunction);
-        $this->text = $twig->render(Html::decode($this->text));
-    }
-
     public function behaviors()
     {
         return [
